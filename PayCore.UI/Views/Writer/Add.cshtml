@@ -8,7 +8,12 @@
 
 <h1>Add</h1>
 
-<form action="/writer/add" method="post">
+<form action="/writer/add" enctype="multipart/form-data" method="post">
+
+    <div>
+        <label>Profile Picture</label>
+        <input type="file" name="profilePicture" />
+    </div>
 
 @*    @Html.ValidationSummary()*@
 
@@ -28,7 +33,10 @@
         <label>Birth Date: </label>
         <input class="form-control" type="date" name="birthdate" />
     </div>
+    <div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </div>
 
-    <button class="btn btn-primary" type="submit">Add</button>
+ 
 </form>
 

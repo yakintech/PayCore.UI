@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayCore.UI.Models.ORM;
 
@@ -11,9 +12,10 @@ using PayCore.UI.Models.ORM;
 namespace PayCore.UI.Migrations
 {
     [DbContext(typeof(PayCoreContext))]
-    partial class PayCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20231213111012_writerTableProfileImagePathAdded")]
+    partial class writerTableProfileImagePathAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

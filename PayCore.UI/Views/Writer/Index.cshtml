@@ -12,6 +12,7 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Surname</th>
             <th>Birth Date</th>
@@ -24,6 +25,7 @@
         {
             <tr id="writer_@item.Id">
                 <td >@item.Id</td>
+                <td><img width="100" src="/images/@item.ProfileImagePath"/></td>
                 <td>@item.Name</td>
                 <td>@item.Surname</td>
                 <td>@item.BirthDate</td>

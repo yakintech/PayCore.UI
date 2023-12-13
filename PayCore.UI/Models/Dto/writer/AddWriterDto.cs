@@ -10,7 +10,8 @@ namespace PayCore.UI.Models.Dto
         [Required(ErrorMessage = "Surname is required!")]
         public string Surname { get; set; }
 
-
         public DateTime BirthDate { get; set; }
+
+        public string ImagePath { get; set; } = "";
     }
 }

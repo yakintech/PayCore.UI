@@ -15,6 +15,8 @@ namespace PayCore.UI.Controllers
                 Name = q.Name,
                 Surname = q.Surname,
                 BirthDate = q.BirthDate,
+                ProfileImagePath = q.ProfileImagePath
+                
             }).ToList();
 
             return View(model);
@@ -27,22 +29,45 @@ namespace PayCore.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddWriterDto model)
+        public async Task<IActionResult> Add(AddWriterDto model, IFormFile profilePicture)
         {
-            if(ModelState.IsValid)
+
+            if(profilePicture != null && profilePicture.Length > 0)
             {
-                Writer writer = new Writer();
-                writer.Name = model.Name;
-                writer.Surname = model.Surname;
-                writer.BirthDate= model.BirthDate;
-                writer.AddDate = DateTime.Now;
-                writer.UpdateDate = DateTime.Now;
-                writer.IsDeleted = false;
 
-                db.Writers.Add(writer);
-                db.SaveChanges();
+                var guid = Guid.NewGuid().ToString();
+                var ext = Path.GetExtension(profilePicture.FileName);
+                var fileName = guid + ext;
 
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await profilePicture.CopyToAsync(fileSrteam);
+                }
+
+                if(ext == ".jpeg" || ext == ".png" || ext == ".jpg")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        Writer writer = new Writer();
+                        writer.Name = model.Name;
+                        writer.Surname = model.Surname;
+                        writer.BirthDate = model.BirthDate;
+                        writer.AddDate = DateTime.Now;
+                        writer.UpdateDate = DateTime.Now;
+                        writer.IsDeleted = false;
+                        writer.ProfileImagePath = fileName;
+
+                        db.Writers.Add(writer);
+                        db.SaveChanges();
+
+                        return Redirect("Index");
+
+                    }
+                }
             }
+
 
             return View();
         }
@@ -83,6 +108,9 @@ namespace PayCore.UI.Controllers
             {
                 writer.IsDeleted = true;
                 db.SaveChanges();
+                //delete file 
+
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/images/" + writer.ProfileImagePath);
                 return Json("ok");
             }
 

@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string ProfileImagePath { get; set; }
 
         public DateTime BirthDate { get; set; }
     }
