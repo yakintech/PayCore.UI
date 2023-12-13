@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model GetWriterByIdDto
+
+
+<h1>Detail</h1>
+
+<div>
+    <h3>Id: @Model.Id</h3>
+    <h3>Name: @Model.Name</h3>
+    <h3>Surname: @Model.Surname</h3>
+    <h3>BirthDate: @Model.BirthDate</h3>
+    <h3>AddDate: @Model.AddDate</h3>
+    <h3>UpdateDate: @Model.UpdateDate</h3>
+</div>
+<hr />
+<div>
+    <button class="btn btn-danger" onclick="deleteWriter(@Model.Id)">Delete</button>
+</div>
+<script>
+
+    function deleteWriter(id) {
+
+        var deleteOk = confirm(`Are u sure?`);
+
+        if (deleteOk) {
+            if (!isNaN(id)) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/writer/delete/' + id,
+                    success: function (msg) {
+                        window.location.href = '/writer'
+                    },
+                    error: function (err) {
+                        alert(err)
+                    }
+                })
+
+            }
+            else {
+                alert("Type error!")
+            }
+        }
+
+
+    }
+
+</script>

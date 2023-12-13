@@ -9,7 +9,7 @@ namespace PayCore.UI.Controllers
 
         public IActionResult Index()
         {
-            List<ListWriterDto> model = db.Writers.Select(q => new ListWriterDto()
+            List<ListWriterDto> model = db.Writers.Where(q => !q.IsDeleted).Select(q => new ListWriterDto()
             {
                 Id= q.Id,
                 Name = q.Name,
@@ -45,6 +45,47 @@ namespace PayCore.UI.Controllers
             }
 
             return View();
+        }
+
+        public IActionResult Detail(int id)
+        {
+            // oncelikle writer db den buluyorum.
+
+            Writer writer = db.Writers.FirstOrDefault(db=> db.Id == id && !db.IsDeleted);
+
+            if (writer != null)
+            {
+                var model = new GetWriterByIdDto();
+                model.Id = id;
+                model.Name = writer.Name;
+                model.Surname = writer.Surname;
+                model.BirthDate = writer.BirthDate;
+                model.AddDate = writer.AddDate;
+                writer.UpdateDate = writer.UpdateDate;
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index");  
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var writer = db.Writers.Find(id);
+
+            if(writer == null)
+            {
+                return Json("islem sirasinda bir hata meydana geldi");
+            }
+            else
+            {
+                writer.IsDeleted = true;
+                db.SaveChanges();
+                return Json("ok");
+            }
+
         }
     }
 }

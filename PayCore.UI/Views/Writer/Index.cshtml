@@ -8,11 +8,60 @@
 <h1>Writers</h1>
 
 
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
-
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Birth Date</th>
+            <th>Delete</th>
+            <th>Detail</th>
         </tr>
     </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr id="writer_@item.Id">
+                <td >@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.BirthDate</td>
+                <td><button class="btn btn-danger" onclick="deleteWriter(@item.Id)">Delete</button></td>
+                <td><a class="btn btn-primary" href="/writer/detail/@item.Id">Go to detail</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
+<script>
+
+    function deleteWriter(id){
+
+        var deleteOk = confirm(`Are u sure?`);
+
+        if(deleteOk){
+            if (!isNaN(id)) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/writer/delete/' + id,
+                    success: function (msg) {
+                        //window.location.href = '/writer'
+                        $("#writer_" + id).fadeOut()
+                    },
+                    error: function (err) {
+                        alert(err)
+                    }
+                })
+
+            }
+            else{
+                alert("Type error!")
+            }
+        }
+
+
+    }
+
+</script>
 
