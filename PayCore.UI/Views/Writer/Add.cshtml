@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model PayCore.UI.Models.Dto.AddWriterDto
+
+<h1>Add</h1>
+
+<form action="/writer/add" method="post">
+
+@*    @Html.ValidationSummary()*@
+
+    @Html.ValidationMessageFor(q => q.Name)
+    <div class="form-group">
+
+        <label>Name: </label>
+        <input class="form-control" type="text" name="name" />
+    </div>
+    @Html.ValidationMessageFor(q => q.Surname)
+    <div class="form-group">
+       
+        <label>Surname: </label>
+        <input class="form-control" type="text" name="surname" />
+    </div>
+    <div class="form-group">
+        <label>Birth Date: </label>
+        <input class="form-control" type="date" name="birthdate" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Add</button>
+</form>
+

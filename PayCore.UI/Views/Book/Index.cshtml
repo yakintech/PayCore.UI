@@ -12,6 +12,9 @@
             <th>Title</th>
             <th>Description</th>
             <th>Add Date</th>
+            <th>Delete</th>
+            <th>Update</th>
+            <th>Detail</th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +24,11 @@
                 <td>@item.Id</td>
                 <td>@item.Title</td>
                 <td>@item.Description</td>
-                <td>@item.AddDate</td>
+                <td>@item.AddDate.ToShortDateString()</td>
+                <td><a href="/book/delete/@item.Id">Delete</a></td>
+                <td><a href="/book/edit/@item.Id">Update</a></td>
+                <td><a href="/book/detail/@item.Id">Detail</a></td>
+
             </tr>
         }
     </tbody>

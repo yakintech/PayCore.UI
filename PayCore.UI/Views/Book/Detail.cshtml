@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model PayCore.UI.Models.ORM.Book
+
+<h1>Detail</h1>
+
+<div>
+    <h3>Title: @Model.Title </h3>
+    <h3>Description: @Model.Description </h3>
+    <h3>Add Date: @Model.AddDate.ToShortDateString()</h3>
+</div>
+<div>
+    <a href="/book">Go to list</a>
+</div>
+
+
+

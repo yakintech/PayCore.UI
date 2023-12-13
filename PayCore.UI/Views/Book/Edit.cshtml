@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model PayCore.UI.Models.ORM.Book
+
+<form method="post" action="/book/edit">
+    <div class="form-group">
+        <label>Title</label>
+        <input class="form-control" type="text" name="title" value="@Model.Title" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" type="text" name="description" value="@Model.Description" />
+    </div>
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <button class="bt btn-outline-primary" type="submit">Update</button>
+</form>
