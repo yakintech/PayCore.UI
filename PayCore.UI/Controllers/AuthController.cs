@@ -10,12 +10,15 @@ namespace PayCore.UI.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signinManager;
+        private readonly ILogger<AuthController> _logger;
 
 
-        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManager)
+
+        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManager, ILogger<AuthController> logger)
         {
             _userManager = userManager;
             _signinManager = signinManager;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -83,6 +86,9 @@ namespace PayCore.UI.Controllers
                 {
                     var result = await _signinManager.PasswordSignInAsync(user,
                            model.Password, true, lockoutOnFailure: true);
+
+                    _logger.LogInformation("Login Success!");
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -5,6 +5,7 @@ namespace PayCore.UI.Controllers
 {
     public class BookController : BaseController
     {
+        
         //book
         public IActionResult Index()
         {
