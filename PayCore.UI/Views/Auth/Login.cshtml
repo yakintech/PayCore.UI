@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+
+@Html.ValidationSummary()
+<form action="/auth/login" method="post">
+
+    <div class="form-group">
+        <label>EMail</label>
+        <input class="form-control" type="email" name="email" />
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" name="password" />
+    </div>
+    <div>
+        <button class="btn btn-primary">Login</button>
+    </div>
+
+</form>
+
