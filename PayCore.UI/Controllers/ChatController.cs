@@ -6,6 +6,7 @@ namespace PayCore.UI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.username = User.Identity.Name;
             return View();
         }
     }

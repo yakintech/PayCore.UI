@@ -4,9 +4,9 @@ namespace PayCore.UI.Hubs
 {
     public class ChatHub : Hub
     {
-        public void Send(string message)
+        public void Send(string username, string message)
         {
-            Clients.All.SendAsync("addMessage", message);
+            Clients.All.SendAsync("addMessage", username, message);
         }
     }
 }

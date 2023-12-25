@@ -21,8 +21,8 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-    connection.on("addMessage", function (message) {
-        var encodedMsg = "User: " + " says " + message;
+    connection.on("addMessage", function (username, message) {
+        var encodedMsg = username + " says " + message;
         var li = document.createElement("li");
         li.textContent = encodedMsg;
         document.getElementById("messages").appendChild(li);
@@ -33,7 +33,8 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
         document.getElementById("sendMessage").addEventListener("click", function (event) {
           
             var message = document.getElementById("message").value;
-            connection.invoke("Send", message).catch(function (err) {
+            var username = '@ViewBag.username';
+            connection.invoke("Send", username, message).catch(function (err) {
                 return console.error(err.toString());
             });
            
