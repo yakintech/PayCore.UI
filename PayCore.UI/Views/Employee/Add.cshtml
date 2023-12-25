@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model PayCore.UI.Models.Dto.AddEmployeeDto
+
+
+
+<h1>Add</h1>
+
+<h3>Date: @DateTime.Now</h3>
+
+<form action="/employee/add" method="post">
+
+    <div>
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name)
+        @*    <label>Name</label> *@
+        @* <input type="text" name="name" /> *@
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Surname)
+        @Html.TextBoxFor(x => x.Surname)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Address)
+        @Html.TextBoxFor(x => x.Address)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.City)
+        @Html.TextBoxFor(x => x.City)
+    </div>
+    <div>
+        <button type="submit">Add</button>
+    </div>
+
+
+</form>
+

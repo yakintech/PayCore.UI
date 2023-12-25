@@ -14,5 +14,9 @@ namespace PayCore.UI.Models.ORM
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Writer> Writers { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; } 
+
+        public DbSet<Employee> Employees { get; set; }
     }
 }
